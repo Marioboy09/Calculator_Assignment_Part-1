@@ -1,47 +1,77 @@
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
+void printHeader(const string& title);
+double getValidNumber(const string& prompt);
+void performArithmetic(double num1, double num2);
+
 int main() {
-    int choice;
+    printHeader("Arithmetic Operations Program");
 
-    do {
-        cout << "\n==============================\n";
-        cout << "      ARITHMETIC MENU         \n";
-        cout << "==============================\n";
-        cout << "1. Addition\n";
-        cout << "2. Subtraction\n";
-        cout << "3. Multiplication\n";
-        cout << "4. Division\n";
-        cout << "5. Exit\n";
-        cout << "Enter your choice (1-5): ";
-        cout << "==============================\n";
-        cin >> choice;
+    double firstNum = getValidNumber("Enter the first number: ");
+    double secondNum = getValidNumber("Enter the second number: ");
 
-        switch (choice) {
-        case 1:
-            std::cout << "\n[Selected: Addition]\n";
-            break;
-        case 2:
-            std::cout << "\n[Selected: Subtraction]\n";
-            break;
-        case 3:
-            std::cout << "\n[Selected: Multiplication]\n";
-            break;
-        case 4:
-            std::cout << "\n[Selected: Division]\n";
-            break;
-        case 5:
-            std::cout << "\nExiting the program. Goodbye!\n";
-            break;
-        default:
-            std::cout << "\nInvalid choice! Please select an option between 1 and 5.\n";
-            break;
-        }
-
-    } while (choice != 5);
+    performArithmetic(firstNum, secondNum);
 
     return 0;
+}
+
+void printHeader(const string& title) {
+    cout << "\n==================================\n";
+    cout << "  " << title << "\n";
+    cout << "==================================\n";
+}
+
+double getValidNumber(const string& prompt) {
+    double value;
+    while (true) {
+        cout << prompt;
+        if (cin >> value) {
+            return value;
+        }
+        
+        cout << "Invalid input. Please enter a valid numerical value.\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+}
+
+void performArithmetic(double num1, double num2) {
+    printHeader("Inputs & Results");
+    
+    cout << "First Input Number:  " << num1 << "\n";
+    cout << "Second Input Number: " << num2 << "\n";
+    cout << "----------------------------------\n";
+
+    // 1. Addition
+    cout << num1 << " + " << num2 << " = " << (num1 + num2) << "\n";
+
+    // 2. Subtraction
+    cout << num1 << " - " << num2 << " = " << (num1 - num2) << "\n";
+
+    // 3. Multiplication
+    cout << num1 << " * " << num2 << " = " << (num1 * num2) << "\n";
+
+    // 4. Division
+    cout << num1 << " / " << num2 << " = ";
+    if (num2 != 0.0) {
+        cout << (num1 / num2) << "\n";
+    } else {
+        cout << "Undefined (Error: Division by zero)\n";
+    }
+
+    // 5. Modulo
+    cout << num1 << " % " << num2 << " = ";
+    if (static_cast<long long>(num2) != 0) {
+        long long int1 = static_cast<long long>(num1);
+        long long int2 = static_cast<long long>(num2);
+        cout << (int1 % int2) << "\n";
+    } else {
+        cout << "Undefined (Error: Modulo by zero)\n";
+    }
+    cout << "==================================\n";
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
