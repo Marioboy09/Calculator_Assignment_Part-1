@@ -1,0 +1,15 @@
+# 1. Make sure you are on your main/master branch and up to date
+git checkout main
+git pull
+
+# 2. Create and switch to your new branch (e.g., 'feature-arithmetic')
+git checkout -b feature-arithmetic
+
+# ... [Paste the C++ code into your file and save it] ...
+
+# 3. Stage and commit your changes
+git add .
+git commit -m "Implement core arithmetic functions and user input handling"
+
+# 4. Push your new branch to GitHub/GitLab
+git push -u origin feature-arithmetic
